@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonShopping", "PokemonShopping\PokemonShopping.csproj", "{5411FFC2-9EE9-4F71-902A-CAA5208EF6AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonShopping.Domain", "PokemonShopping.Domain\PokemonShopping.Domain.csproj", "{1F4483FB-4AFE-45D9-B89C-1801DFDE4D41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5411FFC2-9EE9-4F71-902A-CAA5208EF6AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5411FFC2-9EE9-4F71-902A-CAA5208EF6AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5411FFC2-9EE9-4F71-902A-CAA5208EF6AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5411FFC2-9EE9-4F71-902A-CAA5208EF6AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F4483FB-4AFE-45D9-B89C-1801DFDE4D41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F4483FB-4AFE-45D9-B89C-1801DFDE4D41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F4483FB-4AFE-45D9-B89C-1801DFDE4D41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F4483FB-4AFE-45D9-B89C-1801DFDE4D41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00EF0E67-AFD5-4D8A-BE86-519580BE507E}
+	EndGlobalSection
+EndGlobal
