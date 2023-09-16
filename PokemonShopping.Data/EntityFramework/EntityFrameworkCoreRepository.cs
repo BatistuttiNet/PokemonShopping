@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace PokemonShopping.EntityFramework
 {
@@ -233,6 +234,22 @@ namespace PokemonShopping.EntityFramework
         public async Task<IEnumerable<T>> ListAsync(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] include)
         {
             return await QueryableWhereInclude(where, include).ToListAsync().ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<T>> ListAsync(Expression<Func<T, bool>> where, Expression<Func<T, object>> OrderBy, string dirrection, params Expression<Func<T, object>>[] include)
+        {
+            var query = QueryableWhereInclude(where, include);
+
+            if (dirrection.Equals("asc"))
+            {
+                query = query.OrderBy(OrderBy);
+            }
+            else if (dirrection.Equals("desc"))
+            {
+                query = query.OrderByDescending(OrderBy);
+            }
+
+            return await query.ToListAsync().ConfigureAwait(false);
         }
 
         public T Select(params object[] key)

@@ -2,7 +2,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using PokemonShopping.Application.Mappers;
+using PokemonShopping.Application.Services;
+using PokemonShopping.Application.Services.Interfaces;
 using PokemonShopping.Data.Context;
+using PokemonShopping.Data.SeedData;
 using PokemonShopping.Data.Uow;
 using PokemonShopping.Domain.Interfaces;
 using System;
@@ -10,20 +14,27 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile("appsettings.json");
+var configuration = builder.Configuration;
+
+builder.Services.AddControllers();
+
+builder.Services.AddAutoMapper(typeof(PokemonShoppingMapping));
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+        var jwtSettings = configuration.GetSection("JwtSettings");
+
         options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
         {
-            ValidateIssuer = false, // Set to true if you want to validate the issuer of the token
-            ValidateAudience = false, // Set to true if you want to validate the audience of the token
-            ValidateLifetime = false, // Set to true if you want to validate the token's lifetime
-            ValidateIssuerSigningKey = true, // Set to true if you want to validate the signing key
-
-            // Configure the parameters as per your JWT configuration
-            //ValidIssuer = "your-issuer", // Change to your JWT issuer
-            //ValidAudience = "your-audience", // Change to your JWT audience
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your-secret-key")), // Change to your JWT secret key
+            ValidateIssuer = false,
+            ValidateAudience = false, 
+            ValidateLifetime = false, 
+            ValidateIssuerSigningKey = true, 
+            //ValidIssuer = "your-issuer", 
+            //ValidAudience = "your-audience",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["SecretKey"])), 
         };
     });
 
@@ -38,8 +49,17 @@ builder.Services.AddDbContext<PokemonShoppingContext>(options =>
 });
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IProductApplication, ProductApplication>();
+builder.Services.AddScoped<IUserApplication, UserApplication>();
+builder.Services.AddScoped<IShoppingCartApplication, ShoppingCartApplication>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<PokemonShoppingContext>();
+    SeedData.Initialize(context);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -49,6 +69,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
 
 app.UseEndpoints(endpoints =>
 {

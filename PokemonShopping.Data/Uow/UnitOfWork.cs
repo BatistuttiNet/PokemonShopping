@@ -16,7 +16,7 @@ namespace PokemonShopping.Data.Uow
         protected readonly PokemonShoppingContext _context;
         protected Hashtable _repositories;
 
-        protected UnitOfWork(PokemonShoppingContext context)
+        public UnitOfWork(PokemonShoppingContext context)
         {
             _context = context;
         }

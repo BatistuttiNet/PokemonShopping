@@ -57,5 +57,6 @@ namespace PokemonShopping.Domain.Interfaces
 		Task<IEnumerable<T>> DistinctBy<TKey>(Func<T, TKey> select);
 
 		Task<IEnumerable<T>> DistinctBy<TKey>(Func<T, TKey> select, Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] include);
-	}
+        Task<IEnumerable<T>> ListAsync(Expression<Func<T, bool>> where, Expression<Func<T, object>> OrderBy, string dirrection, params Expression<Func<T, object>>[] include);
+    }
 }

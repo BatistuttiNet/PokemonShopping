@@ -19,6 +19,7 @@ namespace PokemonShopping.Data.Context
 
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductInCart> ProductInCart { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
 
 
@@ -49,6 +50,11 @@ namespace PokemonShopping.Data.Context
             {
                 entity.HasKey(b => b.Id);
                 entity.Property(b => b.Id).ValueGeneratedNever();
+            });
+
+            modelBuilder.Entity<ProductInCart>(entity =>
+            {
+                entity.HasKey(e => new { e.ProductId, e.ShoppingCartId });
             });
 
 
