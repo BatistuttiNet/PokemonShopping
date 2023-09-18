@@ -9,8 +9,17 @@ namespace PokemonShopping.Application.DTOs
     public class ApiResult<T>
     {
         public bool Success { get; set; }
-        public string Message { get; set; }
+        public string? Message { get; set; }
         public T Payload { get; set; }
+
+        internal static ApiResult<T> GetSuccess(T result)
+        {
+            return new ApiResult<T>()
+            {
+                Success = true,
+                Payload = result
+            };
+        }
     }
 
 

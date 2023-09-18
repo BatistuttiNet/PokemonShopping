@@ -16,6 +16,11 @@ namespace PokemonShopping.Application.Mappers
 
             CreateMap<Product, ProductDTO>()
                 .ForMember(dest => dest.Img, src => src.MapFrom(s => Convert.ToBase64String(s.Img)));
+
+
+            CreateMap<CreateUserDto, User>();
+
+            CreateMap<User, UserDto>();
         }
     }
 

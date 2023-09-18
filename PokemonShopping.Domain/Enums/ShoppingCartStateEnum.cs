@@ -1,4 +1,4 @@
-﻿namespace PokemonShopping.Domain.Models
+﻿namespace PokemonShopping.Domain.Enums
 {
     public enum ShoppingCartStateEnum
     {

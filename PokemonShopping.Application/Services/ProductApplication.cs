@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using PokemonShopping.Application.DTOs;
 using PokemonShopping.Application.Services.Interfaces;
 using PokemonShopping.Domain.Interfaces;
@@ -6,15 +7,10 @@ using PokemonShopping.Domain.Models;
 
 namespace PokemonShopping.Application.Services
 {
-    public class ProductApplication: IProductApplication
+    public class ProductApplication: ApplicationBase, IProductApplication
     {
-        private readonly IUnitOfWork _uow;
-        private readonly IMapper _mapper;
-
-        public ProductApplication(IUnitOfWork uow, IMapper mapper)
+        public ProductApplication(IUnitOfWork uow, IMapper mapper, IConfiguration configuration) : base(uow, mapper, configuration)
         {
-            _uow = uow;
-            _mapper = mapper;
         }
 
         public async Task<ApiResult<IEnumerable<ProductDTO>>> GetProductsByFilterAsync(ProductFilter filter)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PokemonShopping.Application.DTOs;
 using PokemonShopping.Application.Services.Interfaces;
@@ -18,6 +19,7 @@ namespace PokemonShopping.Controllers
         }
 
         [HttpGet("GetProductsByFilter")]
+        [Authorize]
         public async Task<ActionResult<ApiResult<IEnumerable<ProductDTO>>>> GetProductsByFilter([FromQuery] ProductFilter filter)
         {
             var result = await _productApplication.GetProductsByFilterAsync(filter);

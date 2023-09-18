@@ -1,4 +1,6 @@
-﻿namespace PokemonShopping.Domain.Models
+﻿using PokemonShopping.Domain.Enums;
+
+namespace PokemonShopping.Domain.Models
 {
     public class ShoppingCart
     {
