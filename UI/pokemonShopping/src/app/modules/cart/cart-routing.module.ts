@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductsComponent } from './products/products.component';
 import { PrivateLayaoutComponent } from '../shared/private-layaout/private-layaout.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   {
     path: '',
     component: PrivateLayaoutComponent,
     children: [
-      { path: 'products', component: ProductsComponent },
+      { path: '', component: CartComponent },
       {
         path: '',
-        redirectTo: 'products',
+        redirectTo: '',
         pathMatch: 'full'
       },
     ]
@@ -22,4 +22,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ProductRoutingModule {}
+export class CartRoutingModule {}

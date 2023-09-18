@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductsComponent } from './products/products.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductRoutingModule } from './produts-routing.module';
 import { ProductFiltersComponent } from './product-filters/product-filters.component';
@@ -13,7 +12,6 @@ import { ProductFiltersDialogComponent } from './product-filters-dialog/product-
 @NgModule({
   declarations: [
     ProductsComponent,
-    ProductDetailComponent,
     ProductCardComponent,
     ProductFiltersComponent,
     ProductFiltersDialogComponent
@@ -22,6 +20,9 @@ import { ProductFiltersDialogComponent } from './product-filters-dialog/product-
     CommonModule,
     SharedModule,
     ProductRoutingModule
+  ],
+  exports: [
+    ProductCardComponent,
   ]
 })
 export class ProductsModule { }
