@@ -1,1 +1,89 @@
 /* You can add global styles to this file, and also import other style files */
+@import './theme.scss';
+
+body {
+  font-family: Roboto;
+  background: var(--black-06, rgba(0, 0, 0, 0.06));
+}
+
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 10PX;
+}
+
+.flex-center {
+  display: flex;
+  flex-direction: row;
+  min-width: 350px;
+  align-items: center;
+}
+
+.remember-me {
+  align-self: flex-start;
+}
+
+.forgot-password {
+  align-self: center;
+  text-decoration: none;
+  color: #007BFF;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.register {
+  align-self: center;
+  font-family: Roboto;
+  text-decoration: none;
+  color: #007BFF;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.logo {
+  text-align: center;
+  padding: 20px;
+}
+
+
+app-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  background: var(--light-background-paper, #FFF);
+  box-shadow: 0px 2px 10px 0px rgba(76, 78, 100, 0.22);
+  width: 100%;
+  max-width: 400px;
+
+}
+
+@media (max-width: 768px) {
+  app-login {
+    padding: 0 20px;
+  }
+}
+
+.login {
+  position: relative;
+  .login-content {
+    transition: opacity 0.3s;
+    &.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+  .centered-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+}

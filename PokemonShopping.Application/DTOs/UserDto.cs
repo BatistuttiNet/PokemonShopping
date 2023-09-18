@@ -8,6 +8,6 @@ namespace PokemonShopping.Application.DTOs
         public string Name { get; set; }
         public string Email { get; set; }
         public string Rol { get; set; }
-        public List<ShoppingCart> ShoppingCarts { get; set; }
+        public List<ShoppingCartDTO> ShoppingCarts { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace PokemonShopping.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<ApiResult<UserDto>>> Login([FromBody] LoginDTO dto)
+        public async Task<ActionResult<ApiResult<AuthResponse>>> Login([FromBody] LoginDTO dto)
         {
             var result = await _userApplication.AuthUserAsync(dto);
             if (result.Success)

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PublicLayaoutComponent } from './public-layaout/public-layaout.component';
 import { PrivateLayaoutComponent } from './private-layaout/private-layaout.component';
 import { RouterModule } from '@angular/router';
+import { AngularMaterialModule } from './angularMaterial.module';
 
 
 
@@ -13,7 +14,11 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    AngularMaterialModule
+  ],
+  exports: [
+    AngularMaterialModule
   ]
 })
 export class SharedModule { }

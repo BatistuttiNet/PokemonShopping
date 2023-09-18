@@ -1,0 +1,136 @@
+/* tslint:disable */
+/* eslint-disable */
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { BaseService } from '../base-service';
+import { ApiConfiguration } from '../api-configuration';
+import { StrictHttpResponse } from '../strict-http-response';
+import { RequestBuilder } from '../request-builder';
+import { Observable } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
+
+import { ProductDtoiEnumerableApiResult } from '../models/product-dtoi-enumerable-api-result';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ProductService extends BaseService {
+  constructor(
+    config: ApiConfiguration,
+    http: HttpClient
+  ) {
+    super(config, http);
+  }
+
+  /**
+   * Path part for operation apiProductGetProductsByFilterGet
+   */
+  static readonly ApiProductGetProductsByFilterGetPath = '/api/Product/GetProductsByFilter';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiProductGetProductsByFilterGet$Plain()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiProductGetProductsByFilterGet$Plain$Response(params?: {
+    Name?: string;
+    Description?: string;
+    PriceFrom?: number;
+    PriceTo?: number;
+    Category?: string;
+  }): Observable<StrictHttpResponse<ProductDtoiEnumerableApiResult>> {
+
+    const rb = new RequestBuilder(this.rootUrl, ProductService.ApiProductGetProductsByFilterGetPath, 'get');
+    if (params) {
+      rb.query('Name', params.Name, {});
+      rb.query('Description', params.Description, {});
+      rb.query('PriceFrom', params.PriceFrom, {});
+      rb.query('PriceTo', params.PriceTo, {});
+      rb.query('Category', params.Category, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: 'text/plain'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<ProductDtoiEnumerableApiResult>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiProductGetProductsByFilterGet$Plain$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiProductGetProductsByFilterGet$Plain(params?: {
+    Name?: string;
+    Description?: string;
+    PriceFrom?: number;
+    PriceTo?: number;
+    Category?: string;
+  }): Observable<ProductDtoiEnumerableApiResult> {
+
+    return this.apiProductGetProductsByFilterGet$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<ProductDtoiEnumerableApiResult>) => r.body as ProductDtoiEnumerableApiResult)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiProductGetProductsByFilterGet$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiProductGetProductsByFilterGet$Json$Response(params?: {
+    Name?: string;
+    Description?: string;
+    PriceFrom?: number;
+    PriceTo?: number;
+    Category?: string;
+  }): Observable<StrictHttpResponse<ProductDtoiEnumerableApiResult>> {
+
+    const rb = new RequestBuilder(this.rootUrl, ProductService.ApiProductGetProductsByFilterGetPath, 'get');
+    if (params) {
+      rb.query('Name', params.Name, {});
+      rb.query('Description', params.Description, {});
+      rb.query('PriceFrom', params.PriceFrom, {});
+      rb.query('PriceTo', params.PriceTo, {});
+      rb.query('Category', params.Category, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<ProductDtoiEnumerableApiResult>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiProductGetProductsByFilterGet$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiProductGetProductsByFilterGet$Json(params?: {
+    Name?: string;
+    Description?: string;
+    PriceFrom?: number;
+    PriceTo?: number;
+    Category?: string;
+  }): Observable<ProductDtoiEnumerableApiResult> {
+
+    return this.apiProductGetProductsByFilterGet$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<ProductDtoiEnumerableApiResult>) => r.body as ProductDtoiEnumerableApiResult)
+    );
+  }
+
+}

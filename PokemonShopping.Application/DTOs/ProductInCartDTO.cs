@@ -3,6 +3,6 @@
     public class ProductInCartDTO
     {
         public int? Quantity { get; set; }
-        public Product Product { get; set; }
+        public ProductDTO Product { get; set; }
     }
 }

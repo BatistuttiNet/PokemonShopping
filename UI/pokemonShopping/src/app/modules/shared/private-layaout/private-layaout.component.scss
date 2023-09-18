@@ -1,0 +1,13 @@
+
+.login {
+  border-radius: 10px;
+  background: var(--light-background-paper, #FFF);
+  box-shadow: 0px 2px 10px 0px rgba(76, 78, 100, 0.22);
+
+}
+
+@media (max-width: 768px) {
+  .login {
+    padding: 0 20px;
+  }
+}

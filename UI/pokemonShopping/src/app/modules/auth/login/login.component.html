@@ -1,18 +1,31 @@
-<h2>Login</h2>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" id="email" formControlName="email" class="form-control" required>
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" id="password" formControlName="password" class="form-control" required>
-  </div>
-  <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+<div class="login">
+  <div class="login-content" [class.disabled]="$isLoading | async">
 
-  <!-- Spinner de carga y mensaje de espera -->
-  <div *ngIf="isLoading" class="spinner-border text-primary" role="status">
-    <span class="sr-only">Loading...</span>
+    <h2 class="logo">POKEMON SHOPPING</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-group">
+
+      <mat-form-field appearance="fill" >
+        <mat-label>Email</mat-label>
+        <input matInput type="email" id="email" formControlName="email" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" id="password" formControlName="password" required>
+      </mat-form-field>
+
+      <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+
+      <button mat-raised-button color="primary" type="submit">Iniciar Sesión</button>
+
+      <a href="#" class="forgot-password">Registrate</a>
+
+
+      <p>{{ message }}</p>
+    </form>
   </div>
-  <p>{{ message }}</p>
-</form>
+
+  <mat-spinner *ngIf="$isLoading | async" [diameter]="50" class="centered-spinner"></mat-spinner>
+
+
+</div>
