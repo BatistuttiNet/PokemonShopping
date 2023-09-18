@@ -1,1 +1,16 @@
-<p>products works!</p>
+<div class="container-products">
+  <aside class="filters-section" *ngIf="!isMobile">
+    <h2>Filtros</h2>
+    <app-product-filters></app-product-filters>
+  </aside>
+
+  <!-- Sección de Productos -->
+  <main class="products-section">
+    <h2>
+      <button mat-icon-button *ngIf="isMobile" (click)="openFilters()">
+        <mat-icon>filter_list</mat-icon>
+      </button>
+      Cartas</h2>
+    <app-product-card></app-product-card>
+  </main>
+</div>

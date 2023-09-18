@@ -6,6 +6,7 @@ import * as AuhtActions from './auth.actions';
 import { UserService } from '../api/services';
 import { AuthResponse } from '../api/models';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
@@ -36,13 +37,14 @@ export class AuthEffects {
   this.actions$.pipe(
     ofType(AuhtActions.loginSuccess),
     tap(action => {
-      alert("Login")
+      this.router.navigate(['/buy/products'])
     })),
     { dispatch: false }
   );
 
   constructor(
     private actions$: Actions,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 }

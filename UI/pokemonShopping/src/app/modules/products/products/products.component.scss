@@ -1,0 +1,21 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.container-products {
+  display: flex;
+  padding: 20px;
+}
+
+.filters-section {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.products-section {
+  flex: 3;
+}
+
+mat-card {
+  margin-bottom: 20px;
+}
