@@ -5,4 +5,3 @@ export const loadCart = createAction('[Cart] Load Cart');
 export const addToCart = createAction('[Cart] Add to  Cart', props<{ add: AddToCartDto }>());
 export const loadCartSuccess = createAction('[Cart] Load Cart Success', props<{ cart: ShoppingCartDto }>());
 export const loadCartFailure = createAction('[Cart] Load Cart Failure', props<{ error: any }>());
-

@@ -4,6 +4,7 @@ export { AuthResponseApiResult } from './models/auth-response-api-result';
 export { BooleanApiResult } from './models/boolean-api-result';
 export { CreateUserDto } from './models/create-user-dto';
 export { LoginDto } from './models/login-dto';
+export { PaymentRequestDto } from './models/payment-request-dto';
 export { ProductDto } from './models/product-dto';
 export { ProductDtoiEnumerableApiResult } from './models/product-dtoi-enumerable-api-result';
 export { ProductInCartDto } from './models/product-in-cart-dto';

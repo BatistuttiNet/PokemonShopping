@@ -46,9 +46,9 @@ namespace PokemonShopping.Controllers
 
         [HttpPost("purchase", Name = "Purchase")]
         [Authorize]
-        public async Task<ActionResult<ApiResult<bool>>> Purchase()
+        public async Task<ActionResult<ApiResult<bool>>> Purchase([FromBody]PaymentRequestDTO request)
         {
-            var result = await _shoppingCartApplication.PurchaseAsync();
+            var result = await _shoppingCartApplication.PurchaseAsync(request);
 
             if (result.Success)
             {

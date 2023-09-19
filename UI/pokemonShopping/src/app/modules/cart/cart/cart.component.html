@@ -8,12 +8,22 @@
     <app-cart-product *ngFor="let product of $productsInCart | async" [product]="product"></app-cart-product>
   </div>
 
-  <div class="total">
+  <div class="total" [class.disabled]="paying">
     <h2>Total de la compra</h2>
     <span class="import">{{$total | async | currency:'USD':'symbol':'1.2-2'}}</span>
     <div class="finalizar">
-      <button mat-raised-button color="primary">Finalizar compra</button>
+      <form (submit)="handlePayment($event)">
+        <div class="credit-card" >
+          <div  id="card-element">
+            <!-- Un elemento de Stripe para la entrada de la tarjeta se adjuntará aquí -->
+        </div>
+        <div id="card-errors" role="alert"></div>
+        </div>
+        <div class="m-t-10 finalizar">
+          <button mat-raised-button color="primary" type="submit">Finalizar compra</button>
+        </div>
+      </form>
     </div>
-
+    <mat-spinner *ngIf="paying" [diameter]="50" class="centered-spinner"></mat-spinner>
   </div>
 </div>

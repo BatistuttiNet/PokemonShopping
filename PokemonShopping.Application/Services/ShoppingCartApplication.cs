@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using PokemonShopping.Application.DTOs;
 using PokemonShopping.Domain.Interfaces;
 using PokemonShopping.Domain.Models;
+using Stripe;
+using Product = PokemonShopping.Domain.Models.Product;
 
 namespace PokemonShopping.Application.Services.Interfaces
 {
@@ -98,21 +100,48 @@ namespace PokemonShopping.Application.Services.Interfaces
             };
         }
 
-        public async Task<ApiResult<bool>> PurchaseAsync()
+        public async Task<ApiResult<bool>> PurchaseAsync(PaymentRequestDTO request)
         {
-            var cart = await _uow.GetRepository<ShoppingCart>().SingleOrDefaultAsync(x => x.UserId == UserId && x.State == Domain.Enums.ShoppingCartStateEnum.pending);
+            var cart = await _uow.GetRepository<ShoppingCart>().SingleOrDefaultAsync(x => x.UserId == UserId && x.State == Domain.Enums.ShoppingCartStateEnum.pending, i => i.Products);
+            cart.Products.ForEach(async x =>
+                  x.Product = await _uow.GetRepository<Product>().SingleOrDefaultAsync(y => y.Id == x.ProductId)
+              );
 
-            cart.State = Domain.Enums.ShoppingCartStateEnum.purchase;
+            var amount = cart.Products.Sum(x => x.Quantity * x.Product.Price)*100;
 
-            await _uow.GetRepository<ShoppingCart>().UpdateAsync(cart, cart.Id);
-
-            await _uow.CommitAsync();
-
-            return new ApiResult<bool>()
+            var chargeOptions = new ChargeCreateOptions
             {
-                Success = true,
-                Payload = true
+                Amount = (long)amount,
+                Currency = "usd",
+                Description = $"Compra del carrito {cart.UserId} del usuario {UserId}",
+                Source = request.Token
             };
+
+            var chargeService = new ChargeService();
+            try
+            {
+                var charge = chargeService.Create(chargeOptions);
+
+                cart.State = Domain.Enums.ShoppingCartStateEnum.purchase;
+
+                await _uow.GetRepository<ShoppingCart>().UpdateAsync(cart, cart.Id);
+
+                await _uow.CommitAsync();
+
+                return new ApiResult<bool>()
+                {
+                    Success = true,
+                    Payload = true
+                };
+            }
+            catch (StripeException ex)
+            {
+                return new ApiResult<bool>()
+                {
+                    Success = false,
+                    Message = ex.Message
+                };
+            }
         }
 
     }

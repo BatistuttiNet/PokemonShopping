@@ -1,4 +1,4 @@
-<div class="product-card">
+<div class="product-card" [class.disabled]="$isLoading | async">
   <div class="product-details">
     <div class="img-container">
       <img mat-card-image [src]="'data:image/jpeg;base64,' + product?.product?.img" alt="Descripción del producto">

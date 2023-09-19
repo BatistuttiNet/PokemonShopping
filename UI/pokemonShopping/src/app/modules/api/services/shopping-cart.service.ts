@@ -11,6 +11,7 @@ import { map, filter } from 'rxjs/operators';
 
 import { AddToCartDto } from '../models/add-to-cart-dto';
 import { BooleanApiResult } from '../models/boolean-api-result';
+import { PaymentRequestDto } from '../models/payment-request-dto';
 import { ShoppingCartDtoApiResult } from '../models/shopping-cart-dto-api-result';
 
 @Injectable({
@@ -201,13 +202,15 @@ export class ShoppingCartService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `purchase$Plain()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   purchase$Plain$Response(params?: {
+    body?: PaymentRequestDto
   }): Observable<StrictHttpResponse<BooleanApiResult>> {
 
     const rb = new RequestBuilder(this.rootUrl, ShoppingCartService.PurchasePath, 'post');
     if (params) {
+      rb.body(params.body, 'application/*+json');
     }
 
     return this.http.request(rb.build({
@@ -225,9 +228,10 @@ export class ShoppingCartService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `purchase$Plain$Response()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   purchase$Plain(params?: {
+    body?: PaymentRequestDto
   }): Observable<BooleanApiResult> {
 
     return this.purchase$Plain$Response(params).pipe(
@@ -239,13 +243,15 @@ export class ShoppingCartService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `purchase$Json()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   purchase$Json$Response(params?: {
+    body?: PaymentRequestDto
   }): Observable<StrictHttpResponse<BooleanApiResult>> {
 
     const rb = new RequestBuilder(this.rootUrl, ShoppingCartService.PurchasePath, 'post');
     if (params) {
+      rb.body(params.body, 'application/*+json');
     }
 
     return this.http.request(rb.build({
@@ -263,9 +269,10 @@ export class ShoppingCartService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `purchase$Json$Response()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   purchase$Json(params?: {
+    body?: PaymentRequestDto
   }): Observable<BooleanApiResult> {
 
     return this.purchase$Json$Response(params).pipe(

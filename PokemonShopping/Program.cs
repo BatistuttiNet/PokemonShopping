@@ -10,6 +10,7 @@ using PokemonShopping.Data.Context;
 using PokemonShopping.Data.SeedData;
 using PokemonShopping.Data.Uow;
 using PokemonShopping.Domain.Interfaces;
+using Stripe;
 using System;
 using System.Text;
 
@@ -50,6 +51,8 @@ builder.Services.AddSwaggerGen(c => {
         Scheme = "Bearer"
     });
 });
+
+StripeConfiguration.ApiKey = "sk_test_51Ns8sKI6MN1a9sO1GN2Q4yFoUIJszAU0t8BgAZ4JUb3AL6MC1x5hLZbtN05hfbfPawse9g4FzTpls0B4DGzv5UxU00Tt9hcxIx";
 
 builder.Services.AddDbContext<PokemonShoppingContext>(options =>
 {

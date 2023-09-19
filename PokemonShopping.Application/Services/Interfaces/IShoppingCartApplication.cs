@@ -7,6 +7,6 @@ namespace PokemonShopping.Application.Services.Interfaces
     {
         Task<ApiResult<ShoppingCartDTO>> GetShoppingCart();
         Task<ApiResult<ShoppingCartDTO>> AddToCartAsync(AddToCartDTO dto);
-        Task<ApiResult<bool>> PurchaseAsync();
+        Task<ApiResult<bool>> PurchaseAsync(PaymentRequestDTO token);
     }
 }
