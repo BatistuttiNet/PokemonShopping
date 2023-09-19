@@ -20,8 +20,8 @@ namespace PokemonShopping.Application.Services
                      (string.IsNullOrEmpty(filter.Name) || p.Name.Contains(filter.Name, StringComparison.OrdinalIgnoreCase))
                   && (string.IsNullOrEmpty(filter.Description) || p.Description.Contains(filter.Description, StringComparison.OrdinalIgnoreCase))
                   && (string.IsNullOrEmpty(filter.Category) || p.Category.Contains(filter.Category, StringComparison.OrdinalIgnoreCase))
-                  && (!filter.PriceFrom.HasValue || p.Price <= filter.PriceFrom.Value)
-                  && (!filter.PriceTo.HasValue || p.Price >= filter.PriceTo.Value)
+                  && (!filter.PriceFrom.HasValue || p.Price >= filter.PriceFrom.Value)
+                  && (!filter.PriceTo.HasValue || p.Price <= filter.PriceTo.Value)
                 , p => p.Price , "desc");
 
             return new ApiResult<IEnumerable<ProductDTO>>()

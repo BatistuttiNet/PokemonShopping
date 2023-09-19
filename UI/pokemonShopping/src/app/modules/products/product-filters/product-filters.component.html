@@ -1,12 +1,12 @@
-<h3>Tipos de pokemon</h3>
-<mat-selection-list #shoes>
-  <mat-list-option *ngFor="let types of typesOfPokemon">
-    {{types}}
+<h3>Colección</h3>
+<mat-selection-list #pokemonList (selectionChange)="onSelectionChange(pokemonList, 'categories' , $event)">
+  <mat-list-option *ngFor="let category of categories" checkboxPosition="before" [value]="category">
+    {{category}}
   </mat-list-option>
 </mat-selection-list>
 <h3>Precio</h3>
-<mat-selection-list #shoes>
-  <mat-list-option *ngFor="let price of precios">
+<mat-selection-list #priceList (selectionChange)="onSelectionChange(priceList, 'prices', $event)">
+  <mat-list-option *ngFor="let price of prices" checkboxPosition="before" [value]="price" >
     {{price}}
   </mat-list-option>
 </mat-selection-list>

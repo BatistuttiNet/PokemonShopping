@@ -12,9 +12,15 @@ export class ProductsEffects {
 
   loadUser$ = createEffect(() => this.actions$.pipe(
     ofType(ProductsActions.loadProducts),
-    switchMap(action => this.service.apiProductGetProductsByFilterGet$Json({
-
-    })
+    switchMap(action => this.service.apiProductGetProductsByFilterGet$Json(
+        action.filter as {
+          Name?: string;
+          Description?: string;
+          PriceFrom?: number;
+          PriceTo?: number;
+          Category?: string;
+        }
+    )
       .pipe(
         map(result => ProductsActions.loadProductsSuccess({
           products: result.payload as ProductDto[]
