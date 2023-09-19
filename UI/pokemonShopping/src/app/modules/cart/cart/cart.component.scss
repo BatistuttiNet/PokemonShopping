@@ -54,10 +54,13 @@ app-product-card:last-child {
 
 @media (max-width: 767px) {
   .container {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 
   .product-details, .total {
     flex-basis: 100%;
+  }
+  .total {
+    margin: 20px;
   }
 }
