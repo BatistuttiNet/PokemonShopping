@@ -11,3 +11,28 @@
     padding: 0 20px;
   }
 }
+
+.menu-button {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .menu-button {
+    display: block;
+  }
+
+  mat-toolbar-row:nth-child(2) {
+    display: none;
+  }
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav button[mat-button] {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 10px;
+}

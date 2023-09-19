@@ -1,13 +1,46 @@
-<div class="private-layout">
-  <mat-toolbar color="primary">
-    <h2 class="logo">POKEMON SHOPPING</h2>
-    <span class="spacer"></span>
-    <button mat-icon-button [routerLink]="'/cart'">
-      <mat-icon>shopping_cart</mat-icon>
-    </button>
-  </mat-toolbar>
 
-  <div class="content">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<mat-sidenav-container class="sidenav-container">
+
+  <mat-sidenav #mobileMenu mode="over" position="start">
+    <h2 class="m-l-10">Menu</h2>
+    <button mat-button [routerLink]="'/buy/products'">Cartas</button>
+    <button mat-button [routerLink]="'/dashboard'">Admin dashboard</button>
+    <button mat-button [routerLink]="'/dashboard'">Configuración de usuario</button>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="private-layout">
+
+      <mat-toolbar  color="primary">
+        <mat-toolbar-row class="mat-elevation-z6">
+          <div class="flex-row displayLimit">
+            <button mat-icon-button class="menu-button" (click)="mobileMenu.toggle()">
+              <mat-icon>menu</mat-icon>
+            </button>
+            <h2 class="logo">POKEMON SHOPPING</h2>
+            <span class="spacer"></span>
+            <button mat-icon-button [routerLink]="'/cart'">
+              <mat-icon>shopping_cart</mat-icon>
+            </button>
+          </div>
+        </mat-toolbar-row>
+        <mat-toolbar-row>
+          <div class="flex-row displayLimit">
+            <a mat-button [routerLink]="'/buy/products'">Cartas</a>
+            <a mat-button [routerLink]="'/dashboard'">Admin dashboar</a>
+            <span class="spacer"></span>
+            <a mat-button [routerLink]="'/dashboard'">Configuración de usuario</a>
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+      <div class="content displayLimit">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+
