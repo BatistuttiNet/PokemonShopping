@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './modules/shared/dashboard/dashboard.component';
 import { UserConfigComponent } from './modules/shared/user-config/user-config.component';
 import { PrivateLayaoutComponent } from './modules/shared/private-layaout/private-layaout.component';
+import { AuthenticateGuard } from './authenticate.guard';
 
 const routes: Routes = [
   {
@@ -16,19 +17,20 @@ const routes: Routes = [
       .then(m => m.AuthModule),
   },
   {
-    path: 'buy',
-    loadChildren: () => import('./modules/products/products.module')
-      .then(m => m.ProductsModule),
-  },
-  {
-    path: 'cart',
-    loadChildren: () => import('./modules/cart/cart.module')
-      .then(m => m.CartModule),
-  },
-  {
     path: '',
     component: PrivateLayaoutComponent,
+    canActivate: [AuthenticateGuard],
     children: [
+      {
+        path: 'buy',
+        loadChildren: () => import('./modules/products/products.module')
+          .then(m => m.ProductsModule),
+      },
+      {
+        path: 'cart',
+        loadChildren: () => import('./modules/cart/cart.module')
+          .then(m => m.CartModule),
+      },
       {
         path: 'dashboard',
         component: DashboardComponent

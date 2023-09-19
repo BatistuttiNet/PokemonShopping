@@ -7,12 +7,13 @@ import { environment } from 'src/environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { authReducer, featureKey } from './modules/+state/auth.reducer';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthEffects } from './modules/+state/auth.effects';
 import { DashboardComponent } from './modules/shared/dashboard/dashboard.component';
 import { UserConfigComponent } from './modules/shared/user-config/user-config.component';
+import { JwtInterceptor } from './jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { UserConfigComponent } from './modules/shared/user-config/user-config.co
     EffectsModule.forFeature([AuthEffects]),
     ApiModule.forRoot({ rootUrl: environment.apiBasePath}),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

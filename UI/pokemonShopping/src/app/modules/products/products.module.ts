@@ -7,6 +7,10 @@ import { ProductFiltersComponent } from './product-filters/product-filters.compo
 import { SharedModule } from '../shared/shared.module';
 import { ProductFiltersDialogComponent } from './product-filters-dialog/product-filters-dialog.component';
 import { ProductCardSkeletonComponent } from './product-card-skeleton/product-card-skeleton.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductsEffects } from './+state/products.effects';
+import { ProductsReducer, productsReducerfeatureKey } from './+state/products.reducer';
 
 
 
@@ -21,7 +25,9 @@ import { ProductCardSkeletonComponent } from './product-card-skeleton/product-ca
   imports: [
     CommonModule,
     SharedModule,
-    ProductRoutingModule
+    ProductRoutingModule,
+    StoreModule.forFeature(productsReducerfeatureKey, ProductsReducer),
+    EffectsModule.forFeature([ProductsEffects]),
   ],
   exports: [
     ProductCardComponent,

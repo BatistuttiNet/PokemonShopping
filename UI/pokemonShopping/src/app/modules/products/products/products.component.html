@@ -11,10 +11,13 @@
         <mat-icon>filter_list</mat-icon>
       </button>
       Cartas</h2>
-      <app-product-card-skeleton></app-product-card-skeleton>
-    <app-product-card></app-product-card>
-    <app-product-card></app-product-card>
-    <app-product-card></app-product-card>
-    <app-product-card></app-product-card>
+      <ng-container *ngIf="$isLoading | async; else elseTemplate">
+        <app-product-card-skeleton></app-product-card-skeleton>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <app-product-card *ngFor="let prodcut of $products | async" [product]="prodcut" ></app-product-card>
+      </ng-template>
+
+
   </main>
 </div>

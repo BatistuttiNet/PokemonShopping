@@ -4,18 +4,12 @@ import { ProductsComponent } from './products/products.component';
 import { PrivateLayaoutComponent } from '../shared/private-layaout/private-layaout.component';
 
 const routes: Routes = [
+  { path: 'products', component: ProductsComponent },
   {
     path: '',
-    component: PrivateLayaoutComponent,
-    children: [
-      { path: 'products', component: ProductsComponent },
-      {
-        path: '',
-        redirectTo: 'products',
-        pathMatch: 'full'
-      },
-    ]
-  }
+    redirectTo: 'products',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({
