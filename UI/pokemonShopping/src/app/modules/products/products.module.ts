@@ -6,6 +6,7 @@ import { ProductRoutingModule } from './produts-routing.module';
 import { ProductFiltersComponent } from './product-filters/product-filters.component';
 import { SharedModule } from '../shared/shared.module';
 import { ProductFiltersDialogComponent } from './product-filters-dialog/product-filters-dialog.component';
+import { ProductCardSkeletonComponent } from './product-card-skeleton/product-card-skeleton.component';
 
 
 
@@ -14,7 +15,8 @@ import { ProductFiltersDialogComponent } from './product-filters-dialog/product-
     ProductsComponent,
     ProductCardComponent,
     ProductFiltersComponent,
-    ProductFiltersDialogComponent
+    ProductFiltersDialogComponent,
+    ProductCardSkeletonComponent
   ],
   imports: [
     CommonModule,
