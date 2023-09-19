@@ -2,5 +2,5 @@
 /* eslint-disable */
 export interface AddToCartDto {
   productId?: string;
-  quantity?: string;
+  quantity?: number;
 }

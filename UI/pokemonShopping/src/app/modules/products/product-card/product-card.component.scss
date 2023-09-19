@@ -4,6 +4,11 @@
   padding: 16px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 16px auto;
+  transition: opacity 0.3s;
+    &.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
 }
 
 .product-details {

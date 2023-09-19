@@ -14,6 +14,8 @@ import { AuthEffects } from './modules/+state/auth.effects';
 import { DashboardComponent } from './modules/shared/dashboard/dashboard.component';
 import { UserConfigComponent } from './modules/shared/user-config/user-config.component';
 import { JwtInterceptor } from './jwt.interceptor';
+import { CartEffects } from './modules/cart/+state/cart.effects';
+import { CartReducer, CartReducerfeatureKey } from './modules/cart/+state/cart.reducer';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { JwtInterceptor } from './jwt.interceptor';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([AuthEffects]),
+    StoreModule.forFeature(CartReducerfeatureKey, CartReducer),
+    EffectsModule.forFeature([CartEffects]),
     ApiModule.forRoot({ rootUrl: environment.apiBasePath}),
   ],
   providers: [

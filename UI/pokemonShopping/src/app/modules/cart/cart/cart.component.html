@@ -1,17 +1,16 @@
 
-<h2>Mi carrito (1 Item)</h2>
+<h2>Mi carrito ({{$quantity | async}} Item)</h2>
 
 <div class="container">
 
 
   <div class="product-details">
-    <app-cart-product></app-cart-product>
-    <app-cart-product></app-cart-product>
+    <app-cart-product *ngFor="let product of $productsInCart | async" [product]="product"></app-cart-product>
   </div>
 
   <div class="total">
     <h2>Total de la compra</h2>
-    <span class="import">$25.00</span>
+    <span class="import">{{$total | async | currency:'USD':'symbol':'1.2-2'}}</span>
     <div class="finalizar">
       <button mat-raised-button color="primary">Finalizar compra</button>
     </div>

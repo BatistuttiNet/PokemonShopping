@@ -11,6 +11,7 @@ import { map, filter } from 'rxjs/operators';
 
 import { AddToCartDto } from '../models/add-to-cart-dto';
 import { BooleanApiResult } from '../models/boolean-api-result';
+import { ShoppingCartDtoApiResult } from '../models/shopping-cart-dto-api-result';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,87 @@ export class ShoppingCartService extends BaseService {
     http: HttpClient
   ) {
     super(config, http);
+  }
+
+  /**
+   * Path part for operation apiShoppingCartGet
+   */
+  static readonly ApiShoppingCartGetPath = '/api/ShoppingCart';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiShoppingCartGet$Plain()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiShoppingCartGet$Plain$Response(params?: {
+  }): Observable<StrictHttpResponse<ShoppingCartDtoApiResult>> {
+
+    const rb = new RequestBuilder(this.rootUrl, ShoppingCartService.ApiShoppingCartGetPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: 'text/plain'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<ShoppingCartDtoApiResult>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiShoppingCartGet$Plain$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiShoppingCartGet$Plain(params?: {
+  }): Observable<ShoppingCartDtoApiResult> {
+
+    return this.apiShoppingCartGet$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<ShoppingCartDtoApiResult>) => r.body as ShoppingCartDtoApiResult)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiShoppingCartGet$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiShoppingCartGet$Json$Response(params?: {
+  }): Observable<StrictHttpResponse<ShoppingCartDtoApiResult>> {
+
+    const rb = new RequestBuilder(this.rootUrl, ShoppingCartService.ApiShoppingCartGetPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<ShoppingCartDtoApiResult>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiShoppingCartGet$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiShoppingCartGet$Json(params?: {
+  }): Observable<ShoppingCartDtoApiResult> {
+
+    return this.apiShoppingCartGet$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<ShoppingCartDtoApiResult>) => r.body as ShoppingCartDtoApiResult)
+    );
   }
 
   /**
@@ -36,7 +118,7 @@ export class ShoppingCartService extends BaseService {
    */
   addToCart$Plain$Response(params?: {
     body?: AddToCartDto
-  }): Observable<StrictHttpResponse<BooleanApiResult>> {
+  }): Observable<StrictHttpResponse<ShoppingCartDtoApiResult>> {
 
     const rb = new RequestBuilder(this.rootUrl, ShoppingCartService.AddToCartPath, 'post');
     if (params) {
@@ -49,7 +131,7 @@ export class ShoppingCartService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<BooleanApiResult>;
+        return r as StrictHttpResponse<ShoppingCartDtoApiResult>;
       })
     );
   }
@@ -62,10 +144,10 @@ export class ShoppingCartService extends BaseService {
    */
   addToCart$Plain(params?: {
     body?: AddToCartDto
-  }): Observable<BooleanApiResult> {
+  }): Observable<ShoppingCartDtoApiResult> {
 
     return this.addToCart$Plain$Response(params).pipe(
-      map((r: StrictHttpResponse<BooleanApiResult>) => r.body as BooleanApiResult)
+      map((r: StrictHttpResponse<ShoppingCartDtoApiResult>) => r.body as ShoppingCartDtoApiResult)
     );
   }
 
@@ -77,7 +159,7 @@ export class ShoppingCartService extends BaseService {
    */
   addToCart$Json$Response(params?: {
     body?: AddToCartDto
-  }): Observable<StrictHttpResponse<BooleanApiResult>> {
+  }): Observable<StrictHttpResponse<ShoppingCartDtoApiResult>> {
 
     const rb = new RequestBuilder(this.rootUrl, ShoppingCartService.AddToCartPath, 'post');
     if (params) {
@@ -90,7 +172,7 @@ export class ShoppingCartService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<BooleanApiResult>;
+        return r as StrictHttpResponse<ShoppingCartDtoApiResult>;
       })
     );
   }
@@ -103,10 +185,10 @@ export class ShoppingCartService extends BaseService {
    */
   addToCart$Json(params?: {
     body?: AddToCartDto
-  }): Observable<BooleanApiResult> {
+  }): Observable<ShoppingCartDtoApiResult> {
 
     return this.addToCart$Json$Response(params).pipe(
-      map((r: StrictHttpResponse<BooleanApiResult>) => r.body as BooleanApiResult)
+      map((r: StrictHttpResponse<ShoppingCartDtoApiResult>) => r.body as ShoppingCartDtoApiResult)
     );
   }
 

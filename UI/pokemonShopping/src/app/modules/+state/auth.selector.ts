@@ -24,8 +24,3 @@ export const selectUser = createSelector(
   selectTokenInfoState,
   (state: AuthState) => state.auth?.user
 );
-
-export const selectCart = createSelector(
-  selectTokenInfoState,
-  (state: AuthState) => state.auth?.user?.shoppingCarts?[0] : []
-);

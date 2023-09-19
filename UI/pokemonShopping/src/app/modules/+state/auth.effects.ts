@@ -7,6 +7,9 @@ import { UserService } from '../api/services';
 import { AuthResponse } from '../api/models';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { CartState } from '../cart/+state/cart.reducer';
+import { Store } from '@ngrx/store';
+import { loadCart } from '../cart/+state/cart.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -37,6 +40,7 @@ export class AuthEffects {
   this.actions$.pipe(
     ofType(AuhtActions.loginSuccess),
     tap(action => {
+      this.cartStore.dispatch(loadCart())
       this.router.navigate(['/buy/products'])
     })),
     { dispatch: false }
@@ -55,6 +59,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private cartStore: Store<CartState>
   ) {}
 }

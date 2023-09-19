@@ -9,5 +9,6 @@ export { ProductDtoiEnumerableApiResult } from './models/product-dtoi-enumerable
 export { ProductInCartDto } from './models/product-in-cart-dto';
 export { RecoveryPasswordDto } from './models/recovery-password-dto';
 export { ShoppingCartDto } from './models/shopping-cart-dto';
+export { ShoppingCartDtoApiResult } from './models/shopping-cart-dto-api-result';
 export { UserDto } from './models/user-dto';
 export { UserDtoApiResult } from './models/user-dto-api-result';

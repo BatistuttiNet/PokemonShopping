@@ -1,11 +1,5 @@
 ﻿using PokemonShopping.Application.DTOs;
 using PokemonShopping.Domain.Models;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PokemonShopping.Application.Mappers
 {
@@ -16,11 +10,10 @@ namespace PokemonShopping.Application.Mappers
 
             CreateMap<Product, ProductDTO>()
                 .ForMember(dest => dest.Img, src => src.MapFrom(s => Convert.ToBase64String(s.Img)));
-
-
             CreateMap<CreateUserDto, User>();
-
             CreateMap<User, UserDto>();
+            CreateMap<ShoppingCart, ShoppingCartDTO>();
+            CreateMap<ProductInCart, ProductInCartDTO>();
         }
     }
 

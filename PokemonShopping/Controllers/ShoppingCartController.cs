@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PokemonShopping.Application.DTOs;
 using PokemonShopping.Application.Services.Interfaces;
+using PokemonShopping.Domain.Models;
 
 namespace PokemonShopping.Controllers
 {
@@ -15,8 +17,23 @@ namespace PokemonShopping.Controllers
             _shoppingCartApplication = shoppingCartApplication;
         }
 
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<ApiResult<ShoppingCartDTO>>> GetShoppingCart()
+        {
+            var result = await _shoppingCartApplication.GetShoppingCart();
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpPost("add", Name = "AddToCart")]
-        public async Task<ActionResult<ApiResult<bool>>> AddToCart([FromBody] AddToCartDTO dto)
+        [Authorize]
+        public async Task<ActionResult<ApiResult<ShoppingCartDTO>>> AddToCart([FromBody] AddToCartDTO dto)
         {
             var result = await _shoppingCartApplication.AddToCartAsync(dto);
 
@@ -28,6 +45,7 @@ namespace PokemonShopping.Controllers
         }
 
         [HttpPost("purchase", Name = "Purchase")]
+        [Authorize]
         public async Task<ActionResult<ApiResult<bool>>> Purchase()
         {
             var result = await _shoppingCartApplication.PurchaseAsync();

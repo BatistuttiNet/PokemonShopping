@@ -1,4 +1,4 @@
-<div class="product-card">
+<div class="product-card" [class.disabled]="$isLoading | async">
   <div class="product-details">
     <div class="img-container">
       <img mat-card-image [src]="'data:image/jpeg;base64,' + product?.img" alt="Descripción del producto">
@@ -9,8 +9,8 @@
       <div>{{product?.category}}</div>
       <div>{{product?.price | currency:'USD':'symbol':'1.2-2'}}</div>
       <div>
-        <button mat-stroked-button>Agregar al Carrito</button>
-        <button style="margin-left: 5px;" mat-raised-button color="primary">Comprar</button>
+        <button mat-stroked-button (click)="addToCart(product)">Agregar al Carrito</button>
+        <button style="margin-left: 5px;" mat-raised-button color="primary" (click)="buy(product)">Comprar</button>
       </div>
     </div>
   </div>

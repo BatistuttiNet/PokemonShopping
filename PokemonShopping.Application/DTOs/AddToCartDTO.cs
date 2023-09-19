@@ -9,6 +9,6 @@ namespace PokemonShopping.Application.DTOs
     public class AddToCartDTO
     {
         public Guid ProductId { get; set; }
-        public Guid Quantity { get; set; }
+        public int Quantity { get; set; }
     }
 }
