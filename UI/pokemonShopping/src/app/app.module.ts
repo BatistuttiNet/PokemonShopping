@@ -11,10 +11,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthEffects } from './modules/+state/auth.effects';
+import { DashboardComponent } from './modules/shared/dashboard/dashboard.component';
+import { UserConfigComponent } from './modules/shared/user-config/user-config.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent,
+    UserConfigComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './modules/shared/dashboard/dashboard.component';
+import { UserConfigComponent } from './modules/shared/user-config/user-config.component';
+import { PrivateLayaoutComponent } from './modules/shared/private-layaout/private-layaout.component';
 
 const routes: Routes = [
   {
@@ -21,6 +24,20 @@ const routes: Routes = [
     path: 'cart',
     loadChildren: () => import('./modules/cart/cart.module')
       .then(m => m.CartModule),
+  },
+  {
+    path: '',
+    component: PrivateLayaoutComponent,
+    children: [
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path: 'user/config',
+        component: UserConfigComponent
+      }
+    ]
   }
 ];
 

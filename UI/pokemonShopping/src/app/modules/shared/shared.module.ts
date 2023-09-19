@@ -4,18 +4,20 @@ import { PublicLayaoutComponent } from './public-layaout/public-layaout.componen
 import { PrivateLayaoutComponent } from './private-layaout/private-layaout.component';
 import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from './angularMaterial.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserConfigComponent } from './user-config/user-config.component';
 
 
 
 @NgModule({
   declarations: [
     PublicLayaoutComponent,
-    PrivateLayaoutComponent
+    PrivateLayaoutComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
-    AngularMaterialModule
+    AngularMaterialModule,
   ],
   exports: [
     AngularMaterialModule
