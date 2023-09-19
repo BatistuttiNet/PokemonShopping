@@ -8,6 +8,8 @@ import { ShoppingCartService } from '../../api/services';
 import { loadStripe } from '@stripe/stripe-js';
 import { Router } from '@angular/router';
 import { loadCart } from '../+state/cart.actions';
+import { MatDialog } from '@angular/material/dialog';
+import { SuccessAlertComponent } from '../../shared/success-alert/success-alert.component';
 
 @Component({
   selector: 'app-cart',
@@ -26,7 +28,7 @@ export class CartComponent implements OnInit {
   $productsInCart: Observable<ProductInCartDto[]>;
   paying: boolean
 
-  constructor(private cartStore: Store<CartState>, private service: ShoppingCartService, private router: Router) {
+  constructor(private cartStore: Store<CartState>, private service: ShoppingCartService, private router: Router, private dialog: MatDialog) {
     this.$quantity = this.cartStore.select(selectQuantity);
     this.$total = this.cartStore.select(selectTotal);
     this.$productsInCart = this.cartStore.select(selectProductsInCart);
@@ -62,9 +64,13 @@ export class CartComponent implements OnInit {
       }
     }).subscribe(x => {
       this.paying = false
-      alert("Pago procesado")
       this.cartStore.dispatch(loadCart())
-      this.router.navigate(['/buy/products'])
+
+      var dialog = this.dialog.open(SuccessAlertComponent);
+
+      dialog.afterClosed().subscribe(x =>  this.router.navigate(['/buy/products']))
+
+
     }, error => this.paying = false);
   }
 

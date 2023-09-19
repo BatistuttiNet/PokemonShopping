@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from './angularMaterial.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserConfigComponent } from './user-config/user-config.component';
+import { SuccessAlertComponent } from './success-alert/success-alert.component';
 
 
 
@@ -13,6 +14,7 @@ import { UserConfigComponent } from './user-config/user-config.component';
   declarations: [
     PublicLayaoutComponent,
     PrivateLayaoutComponent,
+    SuccessAlertComponent,
   ],
   imports: [
     CommonModule,
