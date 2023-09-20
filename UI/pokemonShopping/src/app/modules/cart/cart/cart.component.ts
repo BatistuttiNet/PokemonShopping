@@ -65,11 +65,8 @@ export class CartComponent implements OnInit {
     }).subscribe(x => {
       this.paying = false
       this.cartStore.dispatch(loadCart())
-
-      var dialog = this.dialog.open(SuccessAlertComponent);
-
-      dialog.afterClosed().subscribe(x =>  this.router.navigate(['/buy/products']))
-
+      this.router.navigate(['/buy/products'])
+      this.dialog.open(SuccessAlertComponent);
 
     }, error => this.paying = false);
   }
