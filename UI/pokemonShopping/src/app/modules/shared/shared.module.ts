@@ -7,6 +7,7 @@ import { AngularMaterialModule } from './angularMaterial.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserConfigComponent } from './user-config/user-config.component';
 import { SuccessAlertComponent } from './success-alert/success-alert.component';
+import { CartAlertComponent } from './cart-alert/cart-alert.component';
 
 
 
@@ -15,6 +16,7 @@ import { SuccessAlertComponent } from './success-alert/success-alert.component';
     PublicLayaoutComponent,
     PrivateLayaoutComponent,
     SuccessAlertComponent,
+    CartAlertComponent
   ],
   imports: [
     CommonModule,

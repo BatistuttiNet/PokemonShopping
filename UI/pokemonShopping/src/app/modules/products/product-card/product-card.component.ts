@@ -6,6 +6,8 @@ import { addToCart } from '../../cart/+state/cart.actions';
 import { Observable } from 'rxjs';
 import { selectIsLoading } from '../../cart/+state/cart.selector';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { CartAlertComponent } from '../../shared/cart-alert/cart-alert.component';
 
 @Component({
   selector: 'app-product-card',
@@ -17,7 +19,7 @@ export class ProductCardComponent implements OnInit {
   @Input() product: ProductDto | undefined
   $isLoading: Observable<boolean>;
 
-  constructor(private cartStore: Store<CartState>, private router: Router) {
+  constructor(private cartStore: Store<CartState>, private router: Router, private dialog: MatDialog) {
     this.$isLoading = this.cartStore.select(selectIsLoading);
 
   }
@@ -33,6 +35,8 @@ export class ProductCardComponent implements OnInit {
           quantity: 1
         }
       }))
+
+      this.dialog.open(CartAlertComponent);
     }
   }
 
