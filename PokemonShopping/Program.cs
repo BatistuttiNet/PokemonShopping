@@ -82,6 +82,16 @@ using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<PokemonShoppingContext>();
     SeedData.Initialize(context);
+
+    var userapp = scope.ServiceProvider.GetRequiredService<IUserApplication>();
+
+    await userapp.CreateUserAsync(new PokemonShopping.Application.DTOs.CreateUserDto()
+    {
+        Email = "admin",
+        Password = "admin",
+        Rol = "admin",
+        Name = "admin",
+    });
 }
 
 // Configure the HTTP request pipeline.
@@ -92,6 +102,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseDefaultFiles();
 
 app.UseRouting();
 
@@ -103,6 +115,17 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
+});
+
+app.Use(async (context, next) =>
+{
+    await next();
+
+    if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
+    {
+        context.Request.Path = "/index.html";
+        await next();
+    }
 });
 
 app.Run();
