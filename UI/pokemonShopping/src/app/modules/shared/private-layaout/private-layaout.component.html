@@ -5,8 +5,8 @@
     <h2 class="m-l-10">Menu</h2>
     <button mat-button [routerLink]="'/buy/products'">Cartas</button>
     <button mat-button [routerLink]="'/dashboard'">Admin dashboard</button>
-    <button mat-button [routerLink]="'/user/config'">Configuración de usuario</button>
-    <button mat-button>Salir</button>
+    <!-- <button mat-button [routerLink]="'/user/config'">Configuración de usuario</button> -->
+    <button mat-button (click)="logout()">Salir</button>
   </mat-sidenav>
 
   <mat-sidenav-content>
@@ -30,8 +30,8 @@
             <a mat-button [routerLink]="'/buy/products'">Cartas</a>
             <a mat-button [routerLink]="'/dashboard'">Admin dashboard</a>
             <span class="spacer"></span>
-            <a mat-button [routerLink]="'/user/config'">Configuración de usuario</a>
-            <a mat-button >Salir</a>
+            <!-- <a mat-button [routerLink]="'/user/config'">Configuración de usuario</a> -->
+            <a mat-button (click)="logout()">Salir</a>
           </div>
         </mat-toolbar-row>
       </mat-toolbar>
