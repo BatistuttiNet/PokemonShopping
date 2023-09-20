@@ -21,5 +21,8 @@ export const authReducer = createReducer(
   on(UserActions.login, state => ({ ...state, loading: true })),
   on(UserActions.loginSuccess, (state, { auth }) => ({ ...state, auth, loading: false, error: ''})),
   on(UserActions.loginFailure, (state, { error }) => ({ ...state, error, loading: false })),
+  on(UserActions.createUSer, state => ({ ...state, loading: true })),
+  on(UserActions.createUSerSuccess, (state,) => ({ ...state, loading: false, error: ''})),
+  on(UserActions.createUSerFailure, (state, { error }) => ({ ...state, error, loading: false })),
   on(UserActions.logout, (state) => ({ ...state, auth: null}))
 );

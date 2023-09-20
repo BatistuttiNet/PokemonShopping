@@ -1,31 +1,34 @@
-<div class="login">
-  <div class="login-content" [class.disabled]="$isLoading | async">
 
-    <h2 class="logo">POKEMON SHOPPING</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-group">
+<div class="auth-box">
+  <div class="login">
+    <div class="login-content" [class.disabled]="$isLoading | async">
 
-      <mat-form-field appearance="fill" >
-        <mat-label>Email</mat-label>
-        <input matInput type="email" id="email" formControlName="email" required>
-      </mat-form-field>
+      <h2 class="logo">POKEMON SHOPPING</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-group">
 
-      <mat-form-field appearance="fill">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" id="password" formControlName="password" required>
-      </mat-form-field>
+        <mat-form-field appearance="fill" >
+          <mat-label>Email</mat-label>
+          <input matInput type="email" id="email" formControlName="email" required>
+        </mat-form-field>
 
-      <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" id="password" formControlName="password" required>
+        </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit">Iniciar Sesión</button>
+        <!-- <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a> -->
 
-      <a href="#" class="forgot-password">Registrate</a>
+        <button mat-raised-button color="primary" type="submit">Iniciar Sesión</button>
+
+        <a  [routerLink]="'/auth/register'" class="forgot-password">Registrate</a>
 
 
-      <p>{{ message }}</p>
-    </form>
+        <p>{{ message }}</p>
+      </form>
+    </div>
+
+    <mat-spinner *ngIf="$isLoading | async" [diameter]="50" class="centered-spinner"></mat-spinner>
+
   </div>
-
-  <mat-spinner *ngIf="$isLoading | async" [diameter]="50" class="centered-spinner"></mat-spinner>
-
 
 </div>

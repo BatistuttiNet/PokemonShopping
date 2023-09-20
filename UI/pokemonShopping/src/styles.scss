@@ -65,7 +65,7 @@ html, body {
 }
 
 
-app-login {
+app-login, app-register {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,7 +78,7 @@ app-login {
 }
 
 @media (max-width: 768px) {
-  app-login {
+  app-login, app-register {
     padding: 0 20px;
   }
 }

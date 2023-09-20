@@ -47,6 +47,38 @@ export class AuthEffects {
   );
 
 
+  createUser$ = createEffect(() => this.actions$.pipe(
+    ofType(AuhtActions.createUSer),
+    switchMap(action => this.userService.apiUserCreateUserPost$Json({
+      body: {
+        ...action.user,
+        rol: 'admin' //todo brecha de seguridad
+      }
+    })
+      .pipe(
+        map(result => AuhtActions.loginSuccess({
+          auth: result.payload as AuthResponse
+        })),
+        catchError(error =>
+          {
+            if(error as HttpErrorResponse)  {
+              return of(AuhtActions.createUSerFailure({ error: error.error?.message ?? "" }));
+            }
+            return EMPTY
+          })
+      ))
+    )
+  );
+
+  createUSerSuccess$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(AuhtActions.createUSerSuccess),
+    tap(action => {
+      this.router.navigate(['/auth'])
+    })),
+    { dispatch: false }
+  );
+
   logout$ = createEffect(() =>
   this.actions$.pipe(
     ofType(AuhtActions.logout),
