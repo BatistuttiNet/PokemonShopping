@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { selectQuantity } from '../../cart/+state/cart.selector';
 import { AuthState } from '../../+state/auth.reducer';
 import { logout } from '../../+state/auth.actions';
+import { selectIsAdmin } from '../../+state/auth.selector';
 
 @Component({
   selector: 'app-private-layaout',
@@ -14,9 +15,11 @@ import { logout } from '../../+state/auth.actions';
 export class PrivateLayaoutComponent implements OnInit {
 
   $quantity: Observable<number>;
+  $isAdmin: Observable<boolean>;
 
   constructor(private cartStore: Store<CartState>, private authStore: Store<AuthState>) {
     this.$quantity = this.cartStore.select(selectQuantity);
+    this.$isAdmin = this.authStore.select(selectIsAdmin);
   }
 
   ngOnInit(): void {

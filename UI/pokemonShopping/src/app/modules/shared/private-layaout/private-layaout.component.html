@@ -1,10 +1,9 @@
-
 <mat-sidenav-container class="sidenav-container">
 
   <mat-sidenav #mobileMenu mode="over" position="start">
     <h2 class="m-l-10">Menu</h2>
     <button mat-button [routerLink]="'/buy/products'">Cartas</button>
-    <button mat-button [routerLink]="'/dashboard'">Admin dashboard</button>
+    <button mat-button [routerLink]="'/dashboard'" *ngIf="$isAdmin |async">Admin dashboard</button>
     <!-- <button mat-button [routerLink]="'/user/config'">Configuración de usuario</button> -->
     <button mat-button (click)="logout()">Salir</button>
   </mat-sidenav>
@@ -12,7 +11,7 @@
   <mat-sidenav-content>
     <div class="private-layout">
 
-      <mat-toolbar  color="primary">
+      <mat-toolbar color="primary">
         <mat-toolbar-row class="mat-elevation-z6">
           <div class="flex-row displayLimit">
             <button mat-icon-button class="menu-button" (click)="mobileMenu.toggle()">
@@ -28,7 +27,7 @@
         <mat-toolbar-row>
           <div class="flex-row displayLimit">
             <a mat-button [routerLink]="'/buy/products'">Cartas</a>
-            <a mat-button [routerLink]="'/dashboard'">Admin dashboard</a>
+            <a mat-button [routerLink]="'/dashboard'" *ngIf="$isAdmin |async">Admin dashboard</a>
             <span class="spacer"></span>
             <!-- <a mat-button [routerLink]="'/user/config'">Configuración de usuario</a> -->
             <a mat-button (click)="logout()">Salir</a>
@@ -44,5 +43,3 @@
   </mat-sidenav-content>
 
 </mat-sidenav-container>
-
-

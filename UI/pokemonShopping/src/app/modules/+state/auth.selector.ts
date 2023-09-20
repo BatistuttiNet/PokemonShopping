@@ -24,3 +24,8 @@ export const selectUser = createSelector(
   selectTokenInfoState,
   (state: AuthState) => state.auth?.user
 );
+
+export const selectIsAdmin = createSelector(
+  selectTokenInfoState,
+  (state: AuthState) => state.auth?.user?.rol?.toLocaleLowerCase() === 'admin'
+);

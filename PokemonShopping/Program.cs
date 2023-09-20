@@ -92,6 +92,14 @@ using (var scope = app.Services.CreateScope())
         Rol = "admin",
         Name = "admin",
     });
+
+    await userapp.CreateUserAsync(new PokemonShopping.Application.DTOs.CreateUserDto()
+    {
+        Email = "user",
+        Password = "user",
+        Rol = "user",
+        Name = "user",
+    });
 }
 
 // Configure the HTTP request pipeline.

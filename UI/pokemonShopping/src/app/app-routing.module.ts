@@ -4,6 +4,7 @@ import { DashboardComponent } from './modules/shared/dashboard/dashboard.compone
 import { UserConfigComponent } from './modules/shared/user-config/user-config.component';
 import { PrivateLayaoutComponent } from './modules/shared/private-layaout/private-layaout.component';
 import { AuthenticateGuard } from './authenticate.guard';
+import { AdminGuard } from './admin.guard';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
+        canActivate: [AdminGuard],
         component: DashboardComponent
       },
       {
