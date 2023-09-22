@@ -5,6 +5,7 @@ using PokemonShopping.Application.DTOs;
 using PokemonShopping.Domain.Interfaces;
 using PokemonShopping.Domain.Models;
 using Stripe;
+using Stripe.Issuing;
 using Product = PokemonShopping.Domain.Models.Product;
 
 namespace PokemonShopping.Application.Services.Interfaces
@@ -100,7 +101,7 @@ namespace PokemonShopping.Application.Services.Interfaces
             };
         }
 
-        public async Task<ApiResult<bool>> PurchaseAsync(PaymentRequestDTO request)
+        public async Task<ApiResult<PaymentResponseDTO>> PurchaseAsync(PaymentRequestDTO request)
         {
             var cart = await _uow.GetRepository<ShoppingCart>().SingleOrDefaultAsync(x => x.UserId == UserId && x.State == Domain.Enums.ShoppingCartStateEnum.pending, i => i.Products);
             cart.Products.ForEach(async x =>
@@ -124,25 +125,45 @@ namespace PokemonShopping.Application.Services.Interfaces
 
                 cart.State = Domain.Enums.ShoppingCartStateEnum.purchase;
 
+                cart.PurchaseDate = DateTime.Now;
+
+                cart.TransferId = charge.TransferId;
+
                 await _uow.GetRepository<ShoppingCart>().UpdateAsync(cart, cart.Id);
 
                 await _uow.CommitAsync();
 
-                return new ApiResult<bool>()
+                return new ApiResult<PaymentResponseDTO>()
                 {
                     Success = true,
-                    Payload = true
+                    Payload = new PaymentResponseDTO() { 
+                        TrnsferId = cart.TransferId
+                    }
                 };
             }
             catch (StripeException ex)
             {
-                return new ApiResult<bool>()
+                return new ApiResult<PaymentResponseDTO>()
                 {
                     Success = false,
                     Message = ex.Message
                 };
             }
         }
+
+        public async Task<ApiResult<IEnumerable<ShoppingCartDTO>>> GetPurchasedCartsAsync()
+        {
+            var carts = await _uow.GetRepository<ShoppingCart>().ListAsync(x => x.UserId == UserId && x.State == Domain.Enums.ShoppingCartStateEnum.purchase, i => i.Products);
+
+            if (carts == null) return null;
+
+            return new ApiResult<IEnumerable<ShoppingCartDTO>>()
+            {
+                Success = true,
+                Payload = _mapper.Map<IEnumerable<ShoppingCartDTO>>(carts)
+            };
+        }
+
 
     }
 }

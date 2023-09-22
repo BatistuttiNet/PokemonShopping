@@ -4,4 +4,10 @@
     {
         public string Token { get; set; }
     }
+
+    public class PaymentResponseDTO
+    {
+        public string TrnsferId { get; set; }
+    }
+    
 }

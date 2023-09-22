@@ -56,6 +56,19 @@ namespace PokemonShopping.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("purchaseHistory", Name = "PurchaseHistory")]
+        [Authorize]
+        public async Task<ActionResult<ApiResult<bool>>> PurchaseHistory()
+        {
+            var result = await _shoppingCartApplication.GetPurchasedCartsAsync();
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 
 }
