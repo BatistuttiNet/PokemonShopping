@@ -19,6 +19,7 @@ export const initialState: AuthState = {
 export const authReducer = createReducer(
   initialState,
   on(UserActions.login, state => ({ ...state, loading: true })),
+  on(UserActions.loginWithGoogle, state => ({ ...state, loading: true })),
   on(UserActions.loginSuccess, (state, { auth }) => ({ ...state, auth, loading: false, error: ''})),
   on(UserActions.loginFailure, (state, { error }) => ({ ...state, error, loading: false })),
   on(UserActions.createUSer, state => ({ ...state, loading: true })),

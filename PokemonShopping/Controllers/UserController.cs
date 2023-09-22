@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Google.Apis.Auth;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PokemonShopping.Application.DTOs;
 using PokemonShopping.Application.Services.Interfaces;
@@ -36,6 +37,26 @@ namespace PokemonShopping.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
+        }
+
+        [HttpPost("authenticateWithGoogle")]
+        public async Task<ActionResult<ApiResult<AuthResponse>>> AuthenticateWithGoogle([FromBody] GoogleCredentialDTO googleCredentialDTO)
+        {
+            try
+            {
+                var payload = await GoogleJsonWebSignature.ValidateAsync(googleCredentialDTO.Credential);
+
+                var result = await _userApplication.GetAuthResponseByEmailAsync(payload.Email, payload.Name);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
+                return BadRequest(result);
+            }
+            catch
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpPost("RecoveryPassword")]

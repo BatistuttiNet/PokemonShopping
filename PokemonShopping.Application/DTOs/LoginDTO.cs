@@ -7,4 +7,9 @@ namespace PokemonShopping.Application.DTOs
         public string Email { get; set; }
         public string Password { get; set; }
     }
+
+    public class GoogleCredentialDTO
+    {
+        public string Credential { get; set; }
+    }
 }

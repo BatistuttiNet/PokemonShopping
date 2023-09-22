@@ -3,6 +3,7 @@ export { AuthResponse } from './models/auth-response';
 export { AuthResponseApiResult } from './models/auth-response-api-result';
 export { BooleanApiResult } from './models/boolean-api-result';
 export { CreateUserDto } from './models/create-user-dto';
+export { GoogleCredentialDto } from './models/google-credential-dto';
 export { LoginDto } from './models/login-dto';
 export { PaymentRequestDto } from './models/payment-request-dto';
 export { ProductDto } from './models/product-dto';

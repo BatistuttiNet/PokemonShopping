@@ -280,4 +280,85 @@ export class ShoppingCartService extends BaseService {
     );
   }
 
+  /**
+   * Path part for operation purchaseHistory
+   */
+  static readonly PurchaseHistoryPath = '/api/ShoppingCart/purchaseHistory';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `purchaseHistory$Plain()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  purchaseHistory$Plain$Response(params?: {
+  }): Observable<StrictHttpResponse<BooleanApiResult>> {
+
+    const rb = new RequestBuilder(this.rootUrl, ShoppingCartService.PurchaseHistoryPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: 'text/plain'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<BooleanApiResult>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `purchaseHistory$Plain$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  purchaseHistory$Plain(params?: {
+  }): Observable<BooleanApiResult> {
+
+    return this.purchaseHistory$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<BooleanApiResult>) => r.body as BooleanApiResult)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `purchaseHistory$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  purchaseHistory$Json$Response(params?: {
+  }): Observable<StrictHttpResponse<BooleanApiResult>> {
+
+    const rb = new RequestBuilder(this.rootUrl, ShoppingCartService.PurchaseHistoryPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<BooleanApiResult>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `purchaseHistory$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  purchaseHistory$Json(params?: {
+  }): Observable<BooleanApiResult> {
+
+    return this.purchaseHistory$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<BooleanApiResult>) => r.body as BooleanApiResult)
+    );
+  }
+
 }

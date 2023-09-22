@@ -54,7 +54,7 @@ namespace PokemonShopping.Application.Services
         {
             // Buscar al usuario por su correo electrónico
             var user = await GetRepository()
-                .SingleOrDefaultAsync(u => u.Email.ToLower().Equals(dto.Email.ToLower()), i =>  i.ShoppingCarts);
+                .SingleOrDefaultAsync(u => u.Email.ToLower().Equals(dto.Email.ToLower()));
 
             if (user == null || !VerifyPassword(dto.Password, user.Password))
             {
@@ -66,6 +66,48 @@ namespace PokemonShopping.Application.Services
             }
 
             // Generar un token de autenticación (debes implementar esta lógica)
+            var token = GenerateAuthToken(user);
+
+            var authResponse = new AuthResponse
+            {
+                Token = token,
+                User = _mapper.Map<UserDto>(user)
+            };
+
+            return ApiResult<AuthResponse>.GetSuccess(authResponse);
+        }
+
+        //get authresponse by email
+        public async Task<ApiResult<AuthResponse>> GetAuthResponseByEmailAsync(string email, string name)
+        {
+            var user = await GetRepository()
+                .SingleOrDefaultAsync(u => u.Email.ToLower().Equals(email.ToLower()));
+
+            //if user not found crete user
+            if (user == null)
+            {
+                var createUserDto = new CreateUserDto
+                {
+                    Email = email,
+                    Password = Guid.NewGuid().ToString(),
+                    Rol = "user",
+                    Name = name
+                };
+
+                var result = await CreateUserAsync(createUserDto);
+
+                if (!result.Success)
+                {
+                    return new ApiResult<AuthResponse>()
+                    {
+                        Success = false,
+                        Message = $"Invalid credentials"
+                    };
+                }
+
+                user = _mapper.Map<User>(result.Payload);
+            }
+
             var token = GenerateAuthToken(user);
 
             var authResponse = new AuthResponse

@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { AuthResponse, CreateUserDto } from '../api/models';
 
 export const login = createAction('[User] Load User', props<{ email: string, password: string }>());
+export const loginWithGoogle = createAction('[User] Load User with google', props<{ googleCredentials: string }>());
 export const loginSuccess = createAction('[User] Load User Success', props<{ auth: AuthResponse }>());
 export const loginFailure = createAction('[User] Load User Failure', props<{ error: any }>());
 

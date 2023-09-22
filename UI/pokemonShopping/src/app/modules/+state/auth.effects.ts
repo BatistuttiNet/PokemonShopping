@@ -36,6 +36,28 @@ export class AuthEffects {
     )
   );
 
+  loginWithGoogle$ = createEffect(() => this.actions$.pipe(
+    ofType(AuhtActions.loginWithGoogle),
+    switchMap(action => this.userService.apiUserAuthenticateWithGooglePost$Json({
+      body: {
+        credential: action.googleCredentials
+      }
+    })
+      .pipe(
+        map(result => AuhtActions.loginSuccess({
+          auth: result.payload as AuthResponse
+        })),
+        catchError(error =>
+          {
+            if(error as HttpErrorResponse)  {
+              return of(AuhtActions.loginFailure({ error: error.error?.message ?? "" }));
+            }
+            return EMPTY
+          })
+      ))
+    )
+  );
+
   loginSuccess$ = createEffect(() =>
   this.actions$.pipe(
     ofType(AuhtActions.loginSuccess),

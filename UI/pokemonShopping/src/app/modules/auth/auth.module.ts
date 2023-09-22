@@ -5,13 +5,15 @@ import { RegisterComponent } from './register/register.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing.module';
+import { GoogleLoginComponent } from './login/google-login.component';
 
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    GoogleLoginComponent,
   ],
   imports: [
     AuthRoutingModule,
