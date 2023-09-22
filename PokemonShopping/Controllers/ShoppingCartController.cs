@@ -46,7 +46,7 @@ namespace PokemonShopping.Controllers
 
         [HttpPost("purchase", Name = "Purchase")]
         [Authorize]
-        public async Task<ActionResult<ApiResult<bool>>> Purchase([FromBody]PaymentRequestDTO request)
+        public async Task<ActionResult<ApiResult<PaymentResponseDTO>>> Purchase([FromBody]PaymentRequestDTO request)
         {
             var result = await _shoppingCartApplication.PurchaseAsync(request);
 
@@ -59,7 +59,7 @@ namespace PokemonShopping.Controllers
 
         [HttpGet("purchaseHistory", Name = "PurchaseHistory")]
         [Authorize]
-        public async Task<ActionResult<ApiResult<bool>>> PurchaseHistory()
+        public async Task<ActionResult<ApiResult<IEnumerable<ShoppingCartDTO>>>> PurchaseHistory()
         {
             var result = await _shoppingCartApplication.GetPurchasedCartsAsync();
 

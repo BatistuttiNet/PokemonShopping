@@ -10,9 +10,10 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { AddToCartDto } from '../models/add-to-cart-dto';
-import { BooleanApiResult } from '../models/boolean-api-result';
 import { PaymentRequestDto } from '../models/payment-request-dto';
+import { PaymentResponseDtoApiResult } from '../models/payment-response-dto-api-result';
 import { ShoppingCartDtoApiResult } from '../models/shopping-cart-dto-api-result';
+import { ShoppingCartDtoiEnumerableApiResult } from '../models/shopping-cart-dtoi-enumerable-api-result';
 
 @Injectable({
   providedIn: 'root',
@@ -206,7 +207,7 @@ export class ShoppingCartService extends BaseService {
    */
   purchase$Plain$Response(params?: {
     body?: PaymentRequestDto
-  }): Observable<StrictHttpResponse<BooleanApiResult>> {
+  }): Observable<StrictHttpResponse<PaymentResponseDtoApiResult>> {
 
     const rb = new RequestBuilder(this.rootUrl, ShoppingCartService.PurchasePath, 'post');
     if (params) {
@@ -219,7 +220,7 @@ export class ShoppingCartService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<BooleanApiResult>;
+        return r as StrictHttpResponse<PaymentResponseDtoApiResult>;
       })
     );
   }
@@ -232,10 +233,10 @@ export class ShoppingCartService extends BaseService {
    */
   purchase$Plain(params?: {
     body?: PaymentRequestDto
-  }): Observable<BooleanApiResult> {
+  }): Observable<PaymentResponseDtoApiResult> {
 
     return this.purchase$Plain$Response(params).pipe(
-      map((r: StrictHttpResponse<BooleanApiResult>) => r.body as BooleanApiResult)
+      map((r: StrictHttpResponse<PaymentResponseDtoApiResult>) => r.body as PaymentResponseDtoApiResult)
     );
   }
 
@@ -247,7 +248,7 @@ export class ShoppingCartService extends BaseService {
    */
   purchase$Json$Response(params?: {
     body?: PaymentRequestDto
-  }): Observable<StrictHttpResponse<BooleanApiResult>> {
+  }): Observable<StrictHttpResponse<PaymentResponseDtoApiResult>> {
 
     const rb = new RequestBuilder(this.rootUrl, ShoppingCartService.PurchasePath, 'post');
     if (params) {
@@ -260,7 +261,7 @@ export class ShoppingCartService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<BooleanApiResult>;
+        return r as StrictHttpResponse<PaymentResponseDtoApiResult>;
       })
     );
   }
@@ -273,10 +274,10 @@ export class ShoppingCartService extends BaseService {
    */
   purchase$Json(params?: {
     body?: PaymentRequestDto
-  }): Observable<BooleanApiResult> {
+  }): Observable<PaymentResponseDtoApiResult> {
 
     return this.purchase$Json$Response(params).pipe(
-      map((r: StrictHttpResponse<BooleanApiResult>) => r.body as BooleanApiResult)
+      map((r: StrictHttpResponse<PaymentResponseDtoApiResult>) => r.body as PaymentResponseDtoApiResult)
     );
   }
 
@@ -292,7 +293,7 @@ export class ShoppingCartService extends BaseService {
    * This method doesn't expect any request body.
    */
   purchaseHistory$Plain$Response(params?: {
-  }): Observable<StrictHttpResponse<BooleanApiResult>> {
+  }): Observable<StrictHttpResponse<ShoppingCartDtoiEnumerableApiResult>> {
 
     const rb = new RequestBuilder(this.rootUrl, ShoppingCartService.PurchaseHistoryPath, 'get');
     if (params) {
@@ -304,7 +305,7 @@ export class ShoppingCartService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<BooleanApiResult>;
+        return r as StrictHttpResponse<ShoppingCartDtoiEnumerableApiResult>;
       })
     );
   }
@@ -316,10 +317,10 @@ export class ShoppingCartService extends BaseService {
    * This method doesn't expect any request body.
    */
   purchaseHistory$Plain(params?: {
-  }): Observable<BooleanApiResult> {
+  }): Observable<ShoppingCartDtoiEnumerableApiResult> {
 
     return this.purchaseHistory$Plain$Response(params).pipe(
-      map((r: StrictHttpResponse<BooleanApiResult>) => r.body as BooleanApiResult)
+      map((r: StrictHttpResponse<ShoppingCartDtoiEnumerableApiResult>) => r.body as ShoppingCartDtoiEnumerableApiResult)
     );
   }
 
@@ -330,7 +331,7 @@ export class ShoppingCartService extends BaseService {
    * This method doesn't expect any request body.
    */
   purchaseHistory$Json$Response(params?: {
-  }): Observable<StrictHttpResponse<BooleanApiResult>> {
+  }): Observable<StrictHttpResponse<ShoppingCartDtoiEnumerableApiResult>> {
 
     const rb = new RequestBuilder(this.rootUrl, ShoppingCartService.PurchaseHistoryPath, 'get');
     if (params) {
@@ -342,7 +343,7 @@ export class ShoppingCartService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<BooleanApiResult>;
+        return r as StrictHttpResponse<ShoppingCartDtoiEnumerableApiResult>;
       })
     );
   }
@@ -354,10 +355,10 @@ export class ShoppingCartService extends BaseService {
    * This method doesn't expect any request body.
    */
   purchaseHistory$Json(params?: {
-  }): Observable<BooleanApiResult> {
+  }): Observable<ShoppingCartDtoiEnumerableApiResult> {
 
     return this.purchaseHistory$Json$Response(params).pipe(
-      map((r: StrictHttpResponse<BooleanApiResult>) => r.body as BooleanApiResult)
+      map((r: StrictHttpResponse<ShoppingCartDtoiEnumerableApiResult>) => r.body as ShoppingCartDtoiEnumerableApiResult)
     );
   }
 

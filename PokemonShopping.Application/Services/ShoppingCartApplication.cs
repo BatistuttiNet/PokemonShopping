@@ -58,21 +58,20 @@ namespace PokemonShopping.Application.Services.Interfaces
             return await this.GetShoppingCart();
         }
 
-        private async Task<ShoppingCart> CreateCart(ShoppingCart? cart)
+        private async Task<ShoppingCart> CreateCart()
         {
-            if (cart == null)
-            {
-                cart = new ShoppingCart()
-                {
-                    Id = Guid.NewGuid(),
-                    UserId = UserId,
-                    Date = DateTime.Now,
-                    State = Domain.Enums.ShoppingCartStateEnum.pending,
-                    Products = new List<ProductInCart>()
-                };
 
-                await _uow.GetRepository<ShoppingCart>().AddAsync(cart);
-            }
+            var cart = new ShoppingCart()
+            {
+                Id = Guid.NewGuid(),
+                UserId = UserId,
+                Date = DateTime.Now,
+                State = Domain.Enums.ShoppingCartStateEnum.pending,
+                Products = new List<ProductInCart>()
+            };
+
+            await _uow.GetRepository<ShoppingCart>().AddAsync(cart);
+
 
             return cart;
         }
@@ -83,7 +82,7 @@ namespace PokemonShopping.Application.Services.Interfaces
 
             if (cart == null)
             {
-                cart = await CreateCart(cart);
+                cart = await CreateCart();
 
                 await _uow.CommitAsync();
             }
@@ -108,11 +107,11 @@ namespace PokemonShopping.Application.Services.Interfaces
                   x.Product = await _uow.GetRepository<Product>().SingleOrDefaultAsync(y => y.Id == x.ProductId)
               );
 
-            var amount = cart.Products.Sum(x => x.Quantity * x.Product.Price)*100;
+            var amount = cart.Products.Sum(x => x.Quantity * x.Product.Price);
 
             var chargeOptions = new ChargeCreateOptions
             {
-                Amount = (long)amount,
+                Amount = (long)(amount * 100),
                 Currency = "usd",
                 Description = $"Compra del carrito {cart.UserId} del usuario {UserId}",
                 Source = request.Token
@@ -127,6 +126,8 @@ namespace PokemonShopping.Application.Services.Interfaces
 
                 cart.PurchaseDate = DateTime.Now;
 
+                cart.Amount = amount;
+
                 cart.TransferId = charge.TransferId;
 
                 await _uow.GetRepository<ShoppingCart>().UpdateAsync(cart, cart.Id);
@@ -136,7 +137,8 @@ namespace PokemonShopping.Application.Services.Interfaces
                 return new ApiResult<PaymentResponseDTO>()
                 {
                     Success = true,
-                    Payload = new PaymentResponseDTO() { 
+                    Payload = new PaymentResponseDTO()
+                    {
                         TrnsferId = cart.TransferId
                     }
                 };

@@ -20,7 +20,7 @@
             <h2 class="logo">POKEMON SHOPPING</h2>
             <span class="spacer"></span>
             <button mat-icon-button [routerLink]="'/cart'">
-              <mat-icon [matBadge]="$quantity | async" matBadgeColor="warn">shopping_cart</mat-icon>
+              <mat-icon [matBadge]="$quantity | async" matBadgeColor="warn" [matBadgeHidden]="($quantity | async) === 0">shopping_cart</mat-icon>
             </button>
           </div>
         </mat-toolbar-row>

@@ -9,7 +9,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Router } from '@angular/router';
 import { loadCart } from '../+state/cart.actions';
 import { MatDialog } from '@angular/material/dialog';
-import { SuccessAlertComponent } from '../../shared/success-alert/success-alert.component';
+import { DialogData, SuccessAlertComponent } from '../../shared/success-alert/success-alert.component';
 
 @Component({
   selector: 'app-cart',
@@ -66,7 +66,14 @@ export class CartComponent implements OnInit {
       this.paying = false
       this.cartStore.dispatch(loadCart())
       this.router.navigate(['/buy/products'])
-      this.dialog.open(SuccessAlertComponent);
+
+      const data: DialogData = {
+        transactionId: 12345
+      };
+
+      this.dialog.open(SuccessAlertComponent, {
+        data: x.payload?.trnsferId
+      });
 
     }, error => this.paying = false);
   }
