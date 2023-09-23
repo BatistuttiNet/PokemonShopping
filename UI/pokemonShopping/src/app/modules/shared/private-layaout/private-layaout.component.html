@@ -25,7 +25,7 @@
             <div style="margin-left: 10px;">
               <mat-chip-list>
                 <mat-chip class="user-initials-chip">
-                  {{ $initials | async }}
+                  {{ ($initials | async) ?? '' }}
                 </mat-chip>
               </mat-chip-list>
             </div>
