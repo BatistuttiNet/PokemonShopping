@@ -5,13 +5,15 @@ import { SharedModule } from '../shared/shared.module';
 import { CartRoutingModule } from './cart-routing.module';
 import { ProductsModule } from '../products/products.module';
 import { CartProductComponent } from './cart-product/cart-product.component';
+import { CartHistoryComponent } from './cart-history/cart-history.component';
 
 
 
 @NgModule({
   declarations: [
     CartComponent,
-    CartProductComponent
+    CartProductComponent,
+    CartHistoryComponent
   ],
   imports: [
     CommonModule,
