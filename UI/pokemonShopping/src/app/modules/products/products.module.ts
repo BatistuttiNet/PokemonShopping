@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductsEffects } from './+state/products.effects';
 import { ProductsReducer, productsReducerfeatureKey } from './+state/products.reducer';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -26,6 +27,7 @@ import { ProductsReducer, productsReducerfeatureKey } from './+state/products.re
     CommonModule,
     SharedModule,
     ProductRoutingModule,
+    ReactiveFormsModule,
     StoreModule.forFeature(productsReducerfeatureKey, ProductsReducer),
     EffectsModule.forFeature([ProductsEffects]),
   ],

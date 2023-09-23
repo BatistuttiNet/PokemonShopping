@@ -1,5 +1,12 @@
+
+
+<mat-form-field appearance="fill">
+  <mat-label>Pokemon</mat-label>
+  <input matInput [formControl]="pokemonControl" name="item">
+</mat-form-field>
+
 <h3>Colección</h3>
-<mat-selection-list #pokemonList (selectionChange)="onSelectionChange(pokemonList, 'categories' , $event)">
+<mat-selection-list #pokemonCategory (selectionChange)="onSelectionChange(pokemonCategory, 'categories' , $event)">
   <mat-list-option *ngFor="let category of categories" checkboxPosition="before" [value]="category">
     {{category}}
   </mat-list-option>

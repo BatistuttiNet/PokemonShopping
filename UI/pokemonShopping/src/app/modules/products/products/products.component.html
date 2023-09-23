@@ -16,8 +16,9 @@
       </ng-container>
       <ng-template #elseTemplate>
         <app-product-card *ngFor="let prodcut of $products | async" [product]="prodcut" ></app-product-card>
+        <ng-container *ngIf="($products | async)?.length == 0">
+           <p>No hay productos</p>
+        </ng-container>
       </ng-template>
-
-
   </main>
 </div>

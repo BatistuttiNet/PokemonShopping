@@ -14,3 +14,8 @@ export const selectProducts = createSelector(
   selectTokenInfoState,
   (state: ProductsState) => state.products ?? []
 );
+
+export const selectProductsName = createSelector(
+  selectTokenInfoState,
+  (state: ProductsState) => state.products?.map(x => x.name ?? '') ?? []
+);
