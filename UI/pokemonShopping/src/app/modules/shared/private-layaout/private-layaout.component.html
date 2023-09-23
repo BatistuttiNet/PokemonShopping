@@ -19,10 +19,12 @@
             </button>
             <h2 class="logo">POKEMON SHOPPING</h2>
             <span class="spacer"></span>
+            
             <button mat-icon-button [routerLink]="'/cart'">
               <mat-icon [matBadge]="$quantity | async" matBadgeColor="warn" [matBadgeHidden]="($quantity | async) === 0">shopping_cart</mat-icon>
             </button>
-            <div style="margin-left: 10px;">
+
+            <div class="div-user-initials-chip">
               <mat-chip-list>
                 <mat-chip class="user-initials-chip">
                   {{ ($initials | async) ?? '' }}
