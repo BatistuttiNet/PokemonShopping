@@ -74,7 +74,7 @@ export class AuthEffects {
     switchMap(action => this.userService.apiUserCreateUserPost$Json({
       body: {
         ...action.user,
-        rol: 'admin' //todo brecha de seguridad
+        rol: 'user' //todo brecha de seguridad
       }
     })
       .pipe(

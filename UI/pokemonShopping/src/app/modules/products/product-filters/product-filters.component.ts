@@ -12,7 +12,7 @@ import { loadProducts } from '../+state/products.actions';
 export class ProductFiltersComponent implements OnInit {
 
   categories: string[] = ['Neo', 'Base set'];
-  prices: string[] = ['> 10', '10 - 50', '50 - 100', '<100'];
+  prices: string[] = ['>= 10', '10 - 50', '50 - 100', '>= 100'];
   selectedprice: { from: number | null, to: number | null } | null;
   selectedCategory: string | null;
 
@@ -62,14 +62,14 @@ export class ProductFiltersComponent implements OnInit {
 
   getRange(price: string): { from: number | null, to: number | null } {
     switch (price) {
-        case '> 10':
+        case '>= 10':
             return { from: 10, to: null };
         case '10 - 50':
             return { from: 10, to: 50 };
         case '50 - 100':
             return { from: 50, to: 100 };
-        case '<100':
-            return { from: null, to: 100 };
+        case '>= 100':
+            return { from: 100, to: null };
         default:
             throw new Error('Range not recognized');
     }
