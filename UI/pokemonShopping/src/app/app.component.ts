@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'pokemonShopping';
 
   constructor() {
-    console.log('Version 0.1');
+    console.log('Version 0.2');
 
   }
 
