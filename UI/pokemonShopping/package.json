@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "buildprod": "ng build --prod",
+    "buildprod": "ng build --prod --output-Path ../../PokemonShopping/wwwroot",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

@@ -111,7 +111,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseDefaultFiles();
 
 app.UseRouting();
 
@@ -125,15 +124,10 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
 });
 
-app.Use(async (context, next) =>
+app.MapGet("/", (Func<HttpResponse, Task>)((response) =>
 {
-    await next();
-
-    if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
-    {
-        context.Request.Path = "/index.html";
-        await next();
-    }
-});
+    response.Redirect("/index.html");
+    return Task.CompletedTask;
+}));
 
 app.Run();
