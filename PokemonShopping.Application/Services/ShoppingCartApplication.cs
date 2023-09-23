@@ -128,7 +128,8 @@ namespace PokemonShopping.Application.Services.Interfaces
 
                 cart.Amount = amount;
 
-                cart.TransferId = charge.TransferId;
+                var random = new Random();
+                cart.TransferId = charge?.TransferId ?? random.Next(0, int.MaxValue).ToString(); //Todo se que esto es raro pero, transferId llega vacio no se si sera por que es demo.
 
                 await _uow.GetRepository<ShoppingCart>().UpdateAsync(cart, cart.Id);
 

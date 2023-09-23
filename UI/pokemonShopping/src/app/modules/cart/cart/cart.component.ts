@@ -72,7 +72,10 @@ export class CartComponent implements OnInit {
       };
 
       this.dialog.open(SuccessAlertComponent, {
-        data: x.payload?.trnsferId
+        data:  {
+          transactionId: x.payload?.trnsferId,
+        },
+        width: '250px',
       });
 
     }, error => this.paying = false);

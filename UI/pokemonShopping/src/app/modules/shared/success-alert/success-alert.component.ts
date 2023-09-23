@@ -12,7 +12,9 @@ export interface DialogData {
 })
 export class SuccessAlertComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) { 
+    console.log(data.transactionId);
+  }
 
   ngOnInit(): void {
   }

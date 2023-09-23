@@ -30,6 +30,17 @@ export class CartProductComponent implements OnInit {
       this.cartStore.dispatch(addToCart({
         add: {
           productId: product.product?.id,
+          quantity: 1
+        }
+      }))
+    }
+  }
+
+  removeToCart(product: ProductInCartDto | undefined) {
+    if(product) {
+      this.cartStore.dispatch(addToCart({
+        add: {
+          productId: product.product?.id,
           quantity: -1
         }
       }))

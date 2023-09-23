@@ -79,3 +79,9 @@ app-product-card:last-child {
     margin: 20px;
   }
 }
+
+.button-flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
