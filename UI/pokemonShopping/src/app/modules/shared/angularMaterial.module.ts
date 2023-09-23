@@ -31,6 +31,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
       MatSnackBarModule,
       MatCheckboxModule,
       ScrollingModule,
+      OverlayModule,
       MatSlideToggleModule
    ],
    exports: [

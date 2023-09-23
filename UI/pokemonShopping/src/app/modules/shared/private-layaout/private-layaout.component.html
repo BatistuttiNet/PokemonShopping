@@ -22,6 +22,14 @@
             <button mat-icon-button [routerLink]="'/cart'">
               <mat-icon [matBadge]="$quantity | async" matBadgeColor="warn" [matBadgeHidden]="($quantity | async) === 0">shopping_cart</mat-icon>
             </button>
+            <div style="margin-left: 10px;">
+              <mat-chip-list>
+                <mat-chip class="user-initials-chip">
+                  {{ $initials | async }}
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+
           </div>
         </mat-toolbar-row>
         <mat-toolbar-row>

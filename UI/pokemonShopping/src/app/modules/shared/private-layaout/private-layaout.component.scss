@@ -36,3 +36,16 @@ mat-sidenav button[mat-button] {
   text-align: left;
   margin-bottom: 10px;
 }
+
+
+.user-initials-chip {
+  background-color: #3f51b5;
+  color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+}
