@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatListOption, MatSelectionListChange } from '@angular/material/list';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatListOption, MatSelectionList, MatSelectionListChange } from '@angular/material/list';
 import { ProductsState } from '../+state/products.reducer';
 import { Store } from '@ngrx/store';
 import { loadProducts } from '../+state/products.actions';
@@ -18,6 +18,9 @@ export class ProductFiltersComponent implements OnInit, OnDestroy {
   pokemonControl: FormControl;
   $names: Observable<string[]>;
   pokemonControlSubscription: Subscription;
+
+  @ViewChild('priceList') priceList!: MatSelectionList;
+  @ViewChild('categoryList') categoryList!: MatSelectionList;
 
   categories: string[] = ['Neo', 'Base set'];
   prices: string[] = ['>= 10', '10 - 50', '50 - 100', '>= 100'];
@@ -102,5 +105,20 @@ export class ProductFiltersComponent implements OnInit, OnDestroy {
     }
   }
 
+  clearFilters() {
+    this.pokemonControl.setValue(null, { emitEvent: false });
+    this.selectedprice = null;
+    this.selectedCategory = null;
+
+    if (this.priceList) {
+      this.priceList.deselectAll();
+    }
+  
+    if (this.categoryList) {
+      this.categoryList.deselectAll();
+    }
+
+    this.dispatchFilter();
+  }
 
 }

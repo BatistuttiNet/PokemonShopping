@@ -9,7 +9,7 @@
     <div class="button-flex-end">
       <h3>Productos en el carrito</h3>
       <span class="spacer"></span>
-      <a mat-raised-button [routerLink]="['/buy/products']" color="primary">Agregar otros productos</a>
+      <a mat-raised-button [routerLink]="['/buy/products']" color="primary">Agregar productos</a>
     </div>
     <app-cart-product *ngFor="let product of $productsInCart | async" [product]="product"></app-cart-product>
   </div>

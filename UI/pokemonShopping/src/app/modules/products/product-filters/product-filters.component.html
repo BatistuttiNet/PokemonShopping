@@ -6,7 +6,7 @@
 </mat-form-field>
 
 <h3>Colección</h3>
-<mat-selection-list #pokemonCategory (selectionChange)="onSelectionChange(pokemonCategory, 'categories' , $event)">
+<mat-selection-list #categoryList (selectionChange)="onSelectionChange(categoryList, 'categories' , $event)">
   <mat-list-option *ngFor="let category of categories" checkboxPosition="before" [value]="category">
     {{category}}
   </mat-list-option>
@@ -17,3 +17,6 @@
     {{price}}
   </mat-list-option>
 </mat-selection-list>
+<div class="flex-end">
+  <button mat-raised-button color="primary" (click)="clearFilters()">Limpiar filtros</button>
+</div>

@@ -26,6 +26,13 @@ html, body {
   align-items: center;
 }
 
+.flex-end {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: end;
+}
+
 .flex-row {
   display: flex;
   flex-direction: row;
